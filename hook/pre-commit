@@ -1,0 +1,23 @@
+#!/bin/sh
+
+DIR="suivi"
+# Chemin du fichier commitInfo.txt
+FILE="$DIR/commitInfo.txt"
+
+# Créer le répertoire suivi/ s'il n'existe pas
+mkdir -p "$DIR"
+
+read -p "Voulez-vous vérifier ce commit ? (y/[n]): " yn < /dev/tty
+yn=${yn:n}
+
+case $yn in
+ [Yy]* )
+    # Création du fichier commitInfo.txt avec le texte et la date du jour
+    echo "commit vérifié le $(date)" > $FILE
+    # Ajout du fichier au suivi de Git
+    git add $FILE
+    exit 0;;
+ [Nn]* )
+    exit 0;;
+esac
+exit 0
